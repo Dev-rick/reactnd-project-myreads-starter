@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 // import PropTypes from 'prop-types'
-import escapeRegExp from 'escape-string-regexp';
-import sortBy from 'sort-by';
+
 
 class SearchBook extends Component {
   state = {
@@ -21,7 +20,6 @@ class SearchBook extends Component {
           return book;
         });
         const {booksCurrentlyReading, booksWantToRead, booksRead, booksNone} = this.props;
-        const {showingBooks} = this.state;
         const allBooks = booksNone.concat(booksCurrentlyReading, booksWantToRead, booksRead);
         for (let loadedBook of loadedBooks) {
           loadedBook.shelf = 'none';
@@ -70,10 +68,10 @@ class SearchBook extends Component {
                     {/* used a tertinary operator to check the book.shelf because using value={book.shelf} on select caused problems */}
                     <select onBlur={(event) => this.handleSubmit(book, book.shelf, event)}>
                       <option value="move" disabled="disabled">Move to...</option>
-                      <option value="currentlyReading" selected={((book.shelf == 'currentlyReading') ? 'selected' : '')}>Currently Reading</option>
-                      <option value="wantToRead" selected={((book.shelf == 'wantToRead') ? 'selected' : '')}>Want to Read</option>
-                      <option value="read" selected={((book.shelf == 'read') ? 'selected' : '')}>Read</option>
-                      <option value="none" selected={((book.shelf == 'none') ? 'selected' : '')}>None</option>
+                      <option value="currentlyReading" selected={((book.shelf === 'currentlyReading') ? 'selected' : '')}>Currently Reading</option>
+                      <option value="wantToRead" selected={((book.shelf === 'wantToRead') ? 'selected' : '')}>Want to Read</option>
+                      <option value="read" selected={((book.shelf === 'read') ? 'selected' : '')}>Read</option>
+                      <option value="none" selected={((book.shelf === 'none') ? 'selected' : '')}>None</option>
                     </select>
                   </div>
                 </div>
